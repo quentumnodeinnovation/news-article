@@ -9,11 +9,13 @@
         <div class="ad-image-wrapper">
 
             <!-- Close Button -->
-            @if(($class ?? '') == 'home-top-ad')
-                <button class="ad-close-btn" onclick="closeTopAd()">
-                    ×
-                </button>
-            @endif
+            <button class="ad-close-btn" onclick="this.closest('.ad-box').style.display = 'none';" aria-label="Close Ad">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
 
             <!-- Advertisement Image -->
             <img src="{{ $image }}" alt="Advertisement" class="ad-image">
@@ -68,6 +70,8 @@
     .ad-image {
         max-width: 100%;
         max-height: 100%;
+        height: 100%;
+        width: 100%;
         object-fit: contain;
         display: block;
         transition: transform 0.3s ease;
@@ -83,21 +87,47 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        width: 30px;
-        height: 30px;
-        border: none;
+        width: 26px;
+        height: 26px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
         border-radius: 50%;
-        background: rgba(0, 0, 0, 0.7);
-        color: #fff;
-        font-size: 20px;
-        line-height: 30px;
-        text-align: center;
+        background: rgba(15, 23, 42, 0.7); /* Premium slate-900 with opacity */
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        color: rgba(255, 255, 255, 0.9);
         cursor: pointer;
         z-index: 10;
+        padding: 0;
 
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ad-close-btn svg {
+        width: 12px;
+        height: 12px;
+        stroke: currentColor;
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Hover & Active Effects */
+    .ad-close-btn:hover {
+        background: rgba(15, 23, 42, 0.95);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.08);
+    }
+
+    .ad-close-btn:hover svg {
+        transform: rotate(90deg);
+    }
+
+    .ad-close-btn:active {
+        transform: scale(0.95);
     }
 
     /* Ad Label */

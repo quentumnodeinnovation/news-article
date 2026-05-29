@@ -403,7 +403,14 @@
 
                 {{-- Right: Advertisement --}}
                 <div class="col-xl-3 col-lg-3">
-                    <x-advertisement-box width="100%" height="100%" style="min-height: 250px;" />
+                    <!-- <x-advertisement-box width="100%" height="100%" style="min-height: 250px;" /> -->
+                    @include('components.advertisement-box', [
+                        'width' => '100%',
+                        'height' => '100%',
+                        'min-height' => '250px',
+                        'image' => asset('assets/images/ad/kingfisher-ad.jpeg'),
+                        'class' => ''
+                    ])
                 </div>
             </div>
         </div>
