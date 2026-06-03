@@ -868,7 +868,8 @@ $readingTime = ceil($wordCount / 200);
                                 <div class="rs-author-info">
                                     <h4 style="font-style: italic;">By <span>{{ $article->auther ?? 'Editorial Staff' }}</span>
                                     </h4>
-                                    <p>{{ $article->auther_description ?? 'Our dedicated team of journalists and editors work tirelessly to bring you the most accurate and insightful news coverage. With a passion for storytelling and a commitment to journalistic integrity, our team strives to keep you informed about the latest developments shaping our world.' }}
+                                    <p>
+                                        {!! $article->auther_description ?: 'Our dedicated team of journalists and editors work tirelessly to bring you the most accurate and insightful news coverage. With a passion for storytelling and a commitment to journalistic integrity, our team strives to keep you informed about the latest developments shaping our world.' !!}
                                     </p>
                                 </div>
                             </div>
