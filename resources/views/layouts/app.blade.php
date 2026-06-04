@@ -28,6 +28,8 @@
     <meta name="twitter:description" content="@yield('og_description', 'Latest news and insights from Democracy Asia')">
     <meta name="twitter:image" content="@yield('og_image', asset('assets/images/default/news-placeholder.webp'))">
 
+    <meta name="google-site-verification" content="aqslu04Thax6gJsUfOc4dEY7TEKK53OElmYvBbzKmbA" />
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon-final.jpeg') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css') }}">
@@ -92,9 +94,31 @@
             }
         }
     </style>
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5XWCPB98');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body class="rs-smoother-yes">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XWCPB98" height="0" width="0"
+        style="display:none;visibility:hidden">
+    </iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 @include('components.advertisement-box', [
     'width' => '100%',
