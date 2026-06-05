@@ -7,6 +7,10 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DaVideoController;
 use App\Http\Controllers\CRM\EnquiryController;
+use App\Http\Controllers\SitemapController;
+
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'newHome'])->name('home');
