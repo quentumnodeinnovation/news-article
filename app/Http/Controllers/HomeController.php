@@ -311,7 +311,7 @@ class HomeController extends Controller
             $editorialMonth = $currentDate->copy();
         }
 
-        // Now derive previous months based on this
+        // These are recalculated below if the next-month fallback is needed.
         $currentMonth = $editorialMonth;
         $previousMonth = $editorialMonth->copy()->subMonth();
         $previousToPreviousMonth = $editorialMonth->copy()->subMonths(2);
@@ -330,6 +330,37 @@ class HomeController extends Controller
         $securityCategory = Category::where('slug', 'security')->where('status', 1)->first();
 
         $monthlyEditionCategory = Category::where('slug', 'monthly-editions')->where('status', 1)->first();
+
+        if (!$editorialMonth->isSameMonth($currentDate)) {
+            $heroCategoryIds = collect([
+                $lifestyleCategory?->id,
+                $bookshelfCategory?->id,
+                $democracyCategory?->id,
+                $securityCategory?->id,
+            ])->filter()->values();
+
+            $hasNextMonthHeroArticles = Article::where('status', 'published')
+                ->whereNotNull('published_at')
+                ->whereMonth('published_at', $editorialMonth->month)
+                ->whereYear('published_at', $editorialMonth->year)
+                ->where(function ($query) use ($heroCategoryIds) {
+                    $query->where('section_id', 22);
+
+                    if ($heroCategoryIds->isNotEmpty()) {
+                        $query->orWhereIn('category_id', $heroCategoryIds);
+                    }
+                })
+                ->exists();
+
+            if (!$hasNextMonthHeroArticles) {
+                $editorialMonth = $currentDate->copy();
+            }
+
+            // Keep "Featured stories from last month" relative to the visible home month.
+            $currentMonth = $editorialMonth;
+            $previousMonth = $editorialMonth->copy()->subMonth();
+            $previousToPreviousMonth = $editorialMonth->copy()->subMonths(2);
+        }
 
         // ===== SECTION 1: Hero Section =====
         // Get Political Articles (Center + Left: 2 + 1)
